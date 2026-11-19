@@ -1,7 +1,5 @@
-#include <iostream>
 #include <raylib.h>
-
-using namespace std;
+#include "AnalogClock.hpp"
 
 
 
@@ -9,14 +7,14 @@ int main(){
     
     const int Window_Width = 600;
     const int Window_Height = 600;
+    Color Light_Blue = {225, 239, 240, 255};    
     
-    
-
-    InitWindow(Window_Width, Window_Height, "Analog Clock");
+   InitWindow(Window_Width, Window_Height, "AnalogClock"); 
         
     SetTargetFPS(15);
 
-
+    
+    AnalogClock clock{250, {300, 300}};
     //main loop
     while(WindowShouldClose() == false){
     
@@ -29,8 +27,8 @@ int main(){
         
         //  3) Drawing
         BeginDrawing();
-
-
+        ClearBackground(Light_Blue);
+        clock.Draw();
 
         EndDrawing();
 
