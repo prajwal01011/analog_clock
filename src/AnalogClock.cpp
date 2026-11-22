@@ -1,4 +1,5 @@
 #include "AnalogClock.hpp"
+#include <ctime>
 #include <raylib.h>
 
 Color DARK_GREY = {45,45,45,255};
@@ -7,14 +8,29 @@ Color LIGHT_GREY = {229,229,229,255};
 void AnalogClock::Draw()const
 {
 
+     
     DrawFace();
     DrawHourMarks();
-    DrawMinuteHand(30);
-    DrawHourHand(3,30);       
-    DrawSecondHand(0);
+
+    DrawMinuteHand(minute);
+    DrawHourHand(hour,minute);       
+    DrawSecondHand(second);
     DrawCircleV(position, 15, DARK_GREY); 
     
     }
+
+void AnalogClock::update(){
+    std::time_t t = std::time(0);
+    std::tm* now = std::localtime(&t);  
+
+    hour = now -> tm_hour % 12;
+
+    minute = now -> tm_min;
+
+    second = now -> tm_sec;
+
+        
+}
 
 void AnalogClock::DrawFace()const {
     DrawCircleV(position,size,DARK_GREY);

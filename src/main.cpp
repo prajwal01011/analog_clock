@@ -22,7 +22,7 @@ int main(){
         
 
         //  2) Updating
-            
+       clock.update();     
 
         
         //  3) Drawing
