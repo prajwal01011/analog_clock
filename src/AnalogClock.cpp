@@ -10,9 +10,9 @@ void AnalogClock::Draw()const
     DrawFace();
     DrawHourMarks();
     DrawMinuteHand(30);
-    DrawHourHand(3,30);        
-
- 
+    DrawHourHand(3,30);       
+    DrawSecondHand(0);
+    DrawCircleV(position, 15, DARK_GREY); 
     
     }
 
@@ -38,18 +38,18 @@ void AnalogClock::DrawHourMarks() const{
 
 void AnalogClock::DrawMinuteHand(int minute) const{
     
-    float handWidth =10;
+    float handWidth =10; 
     float handLength = size *0.7;
     
     
     int angle = minute * 6; 
-    DrawHand(handWidth,handLength, angle, DARK_GREY);
+    DrawHand(handWidth,handLength, angle, DARK_GREY, 0);
 }
 
-void AnalogClock::DrawHand(float handWidth, float handLength,int angle, Color color) const{
+void AnalogClock::DrawHand(float handWidth, float handLength,int angle, Color color,int offset) const{
     
     Rectangle handRect = {position.x, position.y, handWidth, handLength};
-    DrawRectanglePro(handRect, {handWidth/2, handLength}, angle, color);
+    DrawRectanglePro(handRect, {handWidth/2, handLength - offset}, angle, color);
 
         }
 
@@ -58,10 +58,14 @@ void AnalogClock::DrawHourHand(int hour, int minute)const{
     int handLength = size * 0.6;
 
     int angle = 30 * hour + (minute / 60.0) * 30;
-    DrawHand(handWidth, handLength, angle, DARKGRAY);    
+    DrawHand(handWidth, handLength, angle, DARKGRAY, 0); 
+    } 
 
+void AnalogClock::DrawSecondHand(int second)const{
     
-   
+    float handWidth = 5;
+    float handLength = size * 1.05;
 
-
-    }  
+    int angle = second * 6;
+    DrawHand(handWidth, handLength, angle, RED, 55);        
+ } 
